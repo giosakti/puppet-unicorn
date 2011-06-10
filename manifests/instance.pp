@@ -19,8 +19,9 @@ define unicorn::instance(
   $monit_extras = nil
 ) {
 
-  if $rails == true {
-    $command = "${command}_rails"
+  $real_command = $rails ? {
+    true  => "${command}_rails",
+    false => $command
   }
 
   file {
