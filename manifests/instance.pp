@@ -30,7 +30,7 @@ define unicorn::instance(
       mode    => 644,
       owner   => $uid,
       group   => $gid,
-      content => template('unicorn/unicorn.conf');
+      content => template('unicorn/unicorn.conf.erb');
   }
 
   $process_name = $name
