@@ -25,7 +25,7 @@ listen <%= port %>, :tcp_nopush => <%= tcp_nopush %>
 <% end -%>
 
 # nuke workers after timeout
-timeout <%= timeout %>
+timeout <%= timeout_secs %>
 
 # Save the pid somewhere
 pid "<%= basedir + '/shared/pids/unicorn.pid' %>"

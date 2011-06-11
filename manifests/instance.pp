@@ -5,7 +5,7 @@ define unicorn::instance(
   $socket_backlog = 64,
   $port = nil,
   $tcp_nopush = true,
-  $timeout = 60,
+  $timeout_secs = 60,
   $preload_app = true,
   $rails = false,
   $rolling_restarts = true,
@@ -40,7 +40,7 @@ define unicorn::instance(
     }
 
     if $port {
-      $check_port = "if failed host localhost port ${port}\n    protocol HTTP request \"/monit_test\"\n    with timeout ${timeout}\n    then restart"
+      $check_port = "if failed host localhost port ${port}\n    protocol HTTP request \"/monit_test\"\n    with timeout ${timeout_secs}\n    then restart"
     }
 
     monit::check::process {
