@@ -16,7 +16,7 @@ define unicorn::instance::rails(
   $env = 'production',
   $uid = 'root',
   $gid = 'root',
-  $monit_extras = nil
+  $monit_extras = ''
 ) {
 
  unicorn::instance {
