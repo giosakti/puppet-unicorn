@@ -26,7 +26,7 @@ define unicorn::instance(
 
   file {
     "${name}_unicorn.conf":
-      path    => "${basedir}/config/unicorn.conf.rb",
+      path    => "${basedir}/shared/config/unicorn.conf.rb",
       mode    => 644,
       owner   => $uid,
       group   => $gid,
@@ -45,10 +45,10 @@ define unicorn::instance(
 
     monit::check::process {
       "${process_name}_unicorn":
-        pidfile => "$basedir/tmp/pids/unicorn.pid",
-        start   => "/bin/sh -c '$real_command master -E $env -c $basedir/config/unicorn.conf.rb -D'",
+        pidfile => "$basedir/shared/pids/unicorn.pid",
+        start   => "/bin/sh -c '$real_command master -E $env -c $basedir/shared/config/unicorn.conf.rb -D'",
         start_extras => "as uid $uid and gid $gid",
-        stop    => "/bin/sh -c 'kill `cat $basedir/tmp/pids/unicorn.pid`'",
+        stop    => "/bin/sh -c 'kill `cat $basedir/shared/pids/unicorn.pid`'",
         customlines => [$check_socket, $check_port, $monit_extras, "group ${process_name}_unicorn"];
     }
   }
@@ -56,9 +56,9 @@ define unicorn::instance(
     service {
       "${process_name}_unicorn":
         provider  => 'base',
-        start     => "$real_command master -E $env -c $basedir/config/unicorn.conf.rb -D",
-        stop      => "kill `cat $basedir/tmp/pids/unicorn.pid`",
-        restart   => "kill -s USR2 `cat $basedir/tmp/pids/unicorn.pid`",
+        start     => "$real_command master -E $env -c $basedir/shared/config/unicorn.conf.rb -D",
+        stop      => "kill `cat $basedir/shared/pids/unicorn.pid`",
+        restart   => "kill -s USR2 `cat $basedir/shared/pids/unicorn.pid`",
         status    => "ps -o pid= -o comm= -p `cat $basedir/shared/pids/unicorn.pid`",
         ensure    => 'running',
         subscribe => File["${name}_unicorn.conf"];
