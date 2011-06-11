@@ -35,12 +35,14 @@ define unicorn::instance(
 
   $process_name = $name
   if $use_monit {
-    if $socket_path {
-      $check_socket = "if failed unixsocket ${socket_path} then alert"
+    $check_socket = $socket_path ? {
+      false   => '',
+      default => "if failed unixsocket ${socket_path} then restart"
     }
 
-    if $port {
-      $check_port = "if failed host localhost port ${port}\n    protocol HTTP request \"/monit_test\"\n    with timeout ${timeout_secs}\n    then restart"
+    $check_port = $port ? {
+      false   => '',
+      default => "if failed host localhost port ${port}\n    protocol HTTP request \"/monit_test\"\n    with timeout ${timeout_secs}\n    then restart"
     }
 
     monit::check::process {
