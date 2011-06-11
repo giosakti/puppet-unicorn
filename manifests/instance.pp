@@ -1,9 +1,9 @@
 define unicorn::instance(
   $basedir,
   $worker_processes = 4,
-  $socket_path = nil,
+  $socket_path = false,
   $socket_backlog = 64,
-  $port = nil,
+  $port = false,
   $tcp_nopush = true,
   $timeout_secs = 60,
   $preload_app = true,

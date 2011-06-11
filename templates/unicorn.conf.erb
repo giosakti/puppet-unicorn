@@ -14,12 +14,12 @@ worker_processes <%= worker_processes %>
 # "current" directory that Capistrano sets up.
 working_directory "<%= basedir + '/current' %>"
 
-<% if has_variable?("socket_path") then -%>
+<% if socket_path then -%>
 # Unix domain socket
 listen "<%= socket_path %>", :backlog => <%= socket_backlog %>
 <% end -%>
 
-<% if has_variable?("port") then -%>
+<% if port then -%>
 # TCP port
 listen <%= port %>, :tcp_nopush => <%= tcp_nopush %>
 <% end -%>
