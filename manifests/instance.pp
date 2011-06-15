@@ -48,7 +48,7 @@ define unicorn::instance(
     monit::check::process {
       "${process_name}_unicorn":
         pidfile => "$basedir/shared/pids/unicorn.pid",
-        start   => "/bin/sh -c '$real_command master -E $env -c $basedir/shared/config/unicorn.conf.rb -D'",
+        start   => "/bin/sh -c '$real_command -E $env -c $basedir/shared/config/unicorn.conf.rb -D'",
         start_extras => "as uid $uid and gid $gid",
         stop    => "/bin/sh -c 'kill `cat $basedir/shared/pids/unicorn.pid`'",
         customlines => [$check_socket, $check_port, $monit_extras, "group ${process_name}_unicorn"];
