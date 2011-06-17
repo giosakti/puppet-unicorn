@@ -10,7 +10,7 @@ define unicorn::instance(
   $rails = false,
   $rolling_restarts = true,
   $rolling_restarts_sleep = 1,
-  $debug_base_port = nil,
+  $debug_base_port = false,
   $after_fork_extras = nil,
   $command = 'unicorn',
   $env = 'production',

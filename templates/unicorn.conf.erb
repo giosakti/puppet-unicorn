@@ -75,7 +75,7 @@ end
 <% end -%>
 
 after_fork do |server, worker|
-<% if has_variable?("debug_base_port") then -%>
+<% if if debug_base_port then -%>
   # per-process listener ports for debugging/admin/migrations
   addr = "127.0.0.1:#{<%= debug_base_port %> + worker.nr}"
   server.listen(addr, :tries => -1, :delay => 5, :tcp_nopush => true)
