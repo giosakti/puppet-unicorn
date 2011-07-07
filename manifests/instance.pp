@@ -58,7 +58,7 @@ define unicorn::instance(
     service {
       "${process_name}_unicorn":
         provider  => 'base',
-        start     => "$real_command master -E $env -c $basedir/shared/config/unicorn.conf.rb -D",
+        start     => "$real_command -E $env -c $basedir/shared/config/unicorn.conf.rb -D",
         stop      => "kill `cat $basedir/shared/pids/unicorn.pid`",
         restart   => "kill -s USR2 `cat $basedir/shared/pids/unicorn.pid`",
         status    => "ps -o pid= -o comm= -p `cat $basedir/shared/pids/unicorn.pid`",
