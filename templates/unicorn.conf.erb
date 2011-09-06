@@ -1,3 +1,7 @@
+<% require_extras.each do |line| -%>
+require <%= line %>
+<% end -%>
+
 # Configuration snippet for <%= name %>
 # 
 # This file is handled by puppet, all local modifications will be lost
@@ -71,8 +75,12 @@ before_fork do |server, worker|
   # helps (but does not completely) prevent identical, repeated signals
   # from being lost when the receiving process is busy.
   sleep <%= rolling_restarts_sleep %>
-end
 <% end -%>
+
+<% before_fork_extras.each do |line| -%>
+  <%= line %>
+<% end -%>
+end
 
 after_fork do |server, worker|
 <% if debug_base_port then -%>
@@ -87,7 +95,7 @@ after_fork do |server, worker|
     ActiveRecord::Base.establish_connection
 <% end -%>
 
-<% after_fork_extras.to_a.each do |line| -%>
+<% after_fork_extras.each do |line| -%>
   <%= line %>
 <% end -%>
 end
