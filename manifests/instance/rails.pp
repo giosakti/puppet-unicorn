@@ -35,6 +35,8 @@ define unicorn::instance::rails(
      rolling_restarts       => $rolling_restarts,
      rolling_restarts_sleep => $rolling_restarts_sleep,
      debug_base_port        => $debug_base_port,
+     require_extras         => $require_fork_extras,
+     before_fork_extras     => $before_fork_extras,
      after_fork_extras      => $after_fork_extras,
      command                => $command,
      env                    => $env,
