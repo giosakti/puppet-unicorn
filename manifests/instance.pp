@@ -36,7 +36,7 @@ define unicorn::instance(
   }
 
   $process_name = $name
-  if $use_monit {
+  if $::use_monit {
     $check_socket = $socket_path ? {
       false   => '',
       default => "if failed unixsocket ${socket_path} then restart"
