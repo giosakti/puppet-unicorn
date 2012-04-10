@@ -99,3 +99,7 @@ after_fork do |server, worker|
   <%= line %>
 <% end -%>
 end
+
+# Fix logging
+# http://unicorn.bogomips.org/FAQ.html
+Configurator::DEFAULTS[:logger].formatter = Logger::Formatter.new
