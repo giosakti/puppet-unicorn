@@ -48,6 +48,14 @@ GC.respond_to?(:copy_on_write_friendly=) and
   GC.copy_on_write_friendly = true
 <% end -%>
 
+<% if before_exec.any? -%>
+before_exec do |server|
+<% before_exec.each do |line| -%>
+  <%= line %>
+<% end -%>
+end
+<% end -%>
+
 before_fork do |server, worker|
 <% if preload_app == true and rails == true then -%>
   # there's no need for the master process to hold a connection

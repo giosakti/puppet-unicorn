@@ -12,6 +12,7 @@ define unicorn::instance(
   $rolling_restarts_sleep = 1,
   $debug_base_port = false,
   $require_extras = [],
+  $before_exec = [],
   $before_fork_extras = [],
   $after_fork_extras = [],
   $command = 'unicorn',
