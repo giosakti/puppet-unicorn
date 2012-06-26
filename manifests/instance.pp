@@ -23,7 +23,7 @@ define unicorn::instance(
 ) {
 
   $real_command = $rails ? {
-    true  => "${command}_rails",
+    true  => "${command}",
     false => $command
   }
 
